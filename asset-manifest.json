@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/uniswap_demo/static/css/main.f855e6bc.css",
+    "main.js": "/uniswap_demo/static/js/main.cc6da9be.js",
+    "static/js/453.a7184827.chunk.js": "/uniswap_demo/static/js/453.a7184827.chunk.js",
+    "index.html": "/uniswap_demo/index.html",
+    "main.f855e6bc.css.map": "/uniswap_demo/static/css/main.f855e6bc.css.map",
+    "main.cc6da9be.js.map": "/uniswap_demo/static/js/main.cc6da9be.js.map",
+    "453.a7184827.chunk.js.map": "/uniswap_demo/static/js/453.a7184827.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.cc6da9be.js"
+  ]
+}
