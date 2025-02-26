@@ -1,99 +1,54 @@
 // src/components/ConnectWallet.tsx
-import React, { useState } from 'react';
-import { ethers } from 'ethers';
-import WalletConnectProvider from '@walletconnect/web3-provider';
+import React from "react";
+import { createAppKit, useAppKitAccount } from "@reown/appkit/react";
+import { EthersAdapter } from "@reown/appkit-adapter-ethers";
+import { AppKitNetwork, sepolia } from "@reown/appkit/networks";
+import { useAppKit } from "@reown/appkit/react";
 
-interface State {
-  provider: ethers.Provider | null;
-  account: string | null;
-  network: string | null;
-}
+// 1. Get projectId
+const projectId = "787920515535b0c17988d383680d9b0d";
+
+// 2. Set the networks
+const networks: [AppKitNetwork, ...AppKitNetwork[]] = [
+  sepolia,
+];
+
+// 3. Create a metadata object - optional
+const metadata = {
+  name: "Uniswap Demo",
+  description: "",
+  url: "https://zimhook.github.io/uniswap_demo", // origin must match your domain & subdomain
+  icons: [],
+};
+
+// 4. Create a AppKit instance
+createAppKit({
+  adapters: [new EthersAdapter()],
+  networks,
+  metadata,
+  projectId,
+});
 
 const ConnectWallet: React.FC = () => {
-  const [state, setState] = useState<State>({
-    provider: null,
-    account: null,
-    network: null,
-  });
-
-  const connectMetaMask = async () => {
-    if (window.ethereum) {
-      try {
-        const ethProvider = new ethers.BrowserProvider(window.ethereum);
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-
-        const accounts = await ethProvider.listAccounts();
-        const network = await ethProvider.getNetwork();
-
-        setState({
-          provider: ethProvider,
-          account: accounts[0].address,
-          network: network.name,
-        });
-      } catch (error) {
-        console.error('MetaMask connection failed:', error);
-      }
-    } else {
-      alert('MetaMask is not installed!');
-    }
-  };
-
-  const connectWalletConnect = async () => {
-    const provider = new WalletConnectProvider({
-      infuraId: '787920515535b0c17988d383680d9b0d', // You need to set up an Infura account to get this ID.
-    });
-
-    try {
-      await provider.enable();
-      const ethProvider = new ethers.BrowserProvider(provider);
-      const accounts = await ethProvider.listAccounts();
-      const network = await ethProvider.getNetwork();
-
-      setState({
-        provider: ethProvider,
-        account: accounts[0].address,
-        network: network.name,
-      });
-    } catch (error) {
-      console.error('WalletConnect connection failed:', error);
-    }
-  };
-
-  const disconnectWallet = () => {
-    setState({
-      provider: null,
-      account: null,
-      network: null,
-    });
-  };
+  const { isConnected, address } = useAppKitAccount()
+  const { open } = useAppKit();
 
   return (
-    <div className="flex flex-col items-center p-4">
-      {!state.account ? (
-        <div className="space-x-4">
+    <div className="ml-auto">
+      {!isConnected ? (
           <button
-            onClick={connectMetaMask}
+            onClick={() => open()}
             className="bg-blue-500 text-white p-2 rounded-md"
           >
-            Connect MetaMask
+            Connect Wallet
           </button>
-          <button
-            onClick={connectWalletConnect}
-            className="bg-green-500 text-white p-2 rounded-md"
-          >
-            Connect WalletConnect
-          </button>
-        </div>
       ) : (
         <div>
-          <h3>Connected</h3>
-          <p>Account: {state.account}</p>
-          <p>Network: {state.network}</p>
           <button
-            onClick={disconnectWallet}
-            className="bg-red-500 text-white p-2 rounded-md mt-4"
+            onClick={() => open()}
+            className="bg-gray-500 text-white p-2 rounded-md"
           >
-            Disconnect
+            Account: {address}
           </button>
         </div>
       )}
