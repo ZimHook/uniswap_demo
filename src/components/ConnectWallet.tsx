@@ -4,6 +4,7 @@ import { createAppKit, useAppKitAccount } from "@reown/appkit/react";
 import { EthersAdapter } from "@reown/appkit-adapter-ethers";
 import { AppKitNetwork, sepolia } from "@reown/appkit/networks";
 import { useAppKit } from "@reown/appkit/react";
+import { truncateString } from "../pages/History";
 
 // 1. Get projectId
 const projectId = "787920515535b0c17988d383680d9b0d";
@@ -48,7 +49,7 @@ const ConnectWallet: React.FC = () => {
             onClick={() => open()}
             className="bg-gray-500 text-white p-2 rounded-md"
           >
-            Account: {address}
+            Sepolia: {truncateString(address)}
           </button>
         </div>
       )}

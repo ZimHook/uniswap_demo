@@ -3,6 +3,7 @@ import Layout from "./components/Layout"
 import Trade from "./pages/Trade"
 import Liquidity from "./pages/Liquidity"
 import History from "./pages/History"
+import Balance from "./pages/Balance"
 
 const routes = [{
   path: '/',
@@ -18,6 +19,10 @@ const routes = [{
     {
       path: 'history',
       element: <History />,
+    },
+    {
+      path: 'balance',
+      element: <Balance />,
     },
     {
       path: '*',

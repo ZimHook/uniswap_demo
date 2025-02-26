@@ -6,6 +6,9 @@ const Header: React.FC = () => {
   return (
     <header className="bg-gray-800 text-white p-4 flex items-center gap-4">
       <nav className='flex items-center gap-4 mx-auto'>
+      <Link to="/balance" className="hover:text-blue-400 px-4 py-2 rounded-md hover:bg-gray-700">
+          tokens
+        </Link>
         <Link to="/trade" className="hover:text-blue-400 px-4 py-2 rounded-md hover:bg-gray-700">
           交易
         </Link>

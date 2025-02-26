@@ -17,7 +17,7 @@ interface Transaction {
   value: string;
 }
 
-const truncateString = (
+export const truncateString = (
   str: string,
   start: number = 6,
   end: number = 4
