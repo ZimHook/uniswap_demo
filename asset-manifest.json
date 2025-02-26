@@ -1,15 +1,18 @@
 {
   "files": {
-    "main.css": "/uniswap_demo/static/css/main.f855e6bc.css",
-    "main.js": "/uniswap_demo/static/js/main.cc6da9be.js",
-    "static/js/453.a7184827.chunk.js": "/uniswap_demo/static/js/453.a7184827.chunk.js",
+    "main.css": "/uniswap_demo/static/css/main.5c7c2f1a.css",
+    "main.js": "/uniswap_demo/static/js/main.b0065fbb.js",
+    "static/js/496.2a91caa8.chunk.js": "/uniswap_demo/static/js/496.2a91caa8.chunk.js",
+    "static/js/463.537fe7db.chunk.js": "/uniswap_demo/static/js/463.537fe7db.chunk.js",
+    "static/media/index.cjs": "/uniswap_demo/static/media/index.d5b35ece7c425af5eaae.cjs",
     "index.html": "/uniswap_demo/index.html",
-    "main.f855e6bc.css.map": "/uniswap_demo/static/css/main.f855e6bc.css.map",
-    "main.cc6da9be.js.map": "/uniswap_demo/static/js/main.cc6da9be.js.map",
-    "453.a7184827.chunk.js.map": "/uniswap_demo/static/js/453.a7184827.chunk.js.map"
+    "main.5c7c2f1a.css.map": "/uniswap_demo/static/css/main.5c7c2f1a.css.map",
+    "main.b0065fbb.js.map": "/uniswap_demo/static/js/main.b0065fbb.js.map",
+    "496.2a91caa8.chunk.js.map": "/uniswap_demo/static/js/496.2a91caa8.chunk.js.map",
+    "463.537fe7db.chunk.js.map": "/uniswap_demo/static/js/463.537fe7db.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f855e6bc.css",
-    "static/js/main.cc6da9be.js"
+    "static/css/main.5c7c2f1a.css",
+    "static/js/main.b0065fbb.js"
   ]
 }
