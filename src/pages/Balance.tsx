@@ -27,11 +27,13 @@ const Balance = () => {
         }
       )
     ).json();
-    setErc20List(list.result);
+    setErc20List(list?.result ?? []);
   };
 
   useEffect(() => {
-    fetchErc20List();
+    if(isConnected) {
+      fetchErc20List();
+    }
   }, [address, isConnected]);
 
   return (
