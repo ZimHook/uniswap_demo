@@ -46,6 +46,7 @@ const Trade = () => {
   const [tokenBalance, setTokenBalance] = useState([0, 0]);
   const { walletProvider } = useAppKitProvider("eip155");
   const { isConnected } = useAppKitAccount();
+  const [priceImpact, setPriceImpact] = useState(1);
   const { open } = useAppKit();
 
   const from = isReversed ? mockTokens.token2 : mockTokens.token1;
@@ -77,11 +78,15 @@ const Trade = () => {
         throw new Error("授权失败");
       }
       const routerContract = new Contract(ROUTER_ADDRESS, ROUTER_ABI, signer);
+      const minAmountOut = BigInt(
+        ((Number(outputAmount) * (100 - Number(priceImpact))) / 100) *
+          10 ** to.decimals
+      );
       const swap_tx = await routerContract.swap(
         from.address,
         to.address,
         BigInt(Number(inputAmount) * 10 ** from.decimals),
-        0
+        minAmountOut
       );
       const swap_res = await swap_tx.wait();
       if (swap_res.status !== 1) {
@@ -297,6 +302,32 @@ const Trade = () => {
           />
         </div>
 
+        <div className="relative">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-white">滑点</span>
+            <span className="text-gray-400 text-sm">{priceImpact}%</span>
+          </div>
+          <input
+            type="number"
+            value={priceImpact}
+            onChange={(e) => {
+              let value = e.target.value;
+              const splited = value.split(".");
+              if (splited[1]?.length > 2) {
+                value = splited[0] + "." + splited[1].slice(0, 2);
+              }
+              if (Number(value) > 100) {
+                value = "100";
+              }
+              setPriceImpact(Number(value));
+            }}
+            className="w-full bg-gray-700 text-white rounded-lg p-4 outline-none"
+            placeholder="输入滑点百分比"
+            min={0}
+            max={100}
+            step="0.1"
+          />
+        </div>
         <button
           onClick={handleConfirm}
           className={`w-full bg-blue-600 text-white rounded-lg p-4 hover:bg-blue-700 transition-colors`}
